@@ -1,0 +1,91 @@
+<<===================================== Database Setup ==============================================>>
+<<===================================== prisma generate==============================================>>
+1. prisma install and prisma init  and provider sqllite database name and inside prisma folder create a file name dev.db it's database. 
+** prisma schema push on database > prisma migrate dev
+** prisma have studio in include database all data start prisma studio > npx prisma studio
+2. seed on database inside the prisma folder create a file seed.js and package.json write this code [ "prisma": {
+    "seed": " node prisma/seed.js"
+  },] or you use to typeScript you need to write this code ["prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts" [install ts-node -D]
+  },]
+
+<<=====================================Server Setup Apollo===================================================>>
+1. install apoll_server_micro and inside nextjs appp > pages> api> graphql.js and write the code [import { ApolloServer } from "apollo-server-micro";
+** apollo server need to argments {schema , context } 
+
+<<====================================== Nexus setUp ====================================================>>
+1. schema provide on nexus You need to install nexus 
+** create a file inside graphql folder schema.js and provide 2 file creation path.MakeSchema need types what type schema you need to genarate 
+** create a file inside the graphql > types > Link.js + User.js and you need a file index.js it's help to all file export 
+** and this all file export defaule index file  and import it import * as types from ./types 
+** you Only write the Link.js and User.js code and export it index.js 
+
+*********** start nextjs project and it's will automatic running your server with graphql Your server port on localhost:3000/api/graphql **************
+
+
+
+<<=========================================== Redux Tollkit Setup ================================================>>
+1. Install npm install @reduxjs/toolkit react-redux 
+** create a folder call app> inside the folder create a file store.js inside the file write the code 
+import { configureStore } from '@reduxjs/toolkit'
+export const store = configureStore({
+  reducer: {},
+})
+** configurationStore need to reducer 
+** You need to create reducer You create a folder inside the app folder > Feateures> include the features folder you need to write your slice file example [userSlice.js]
+*import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+  userAuthenticated: false,
+};
+
+const userSlice = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {
+    setAuthenticated: (state, action) => {
+      state.userAuthenticated = action.payload;
+    },
+  },
+});
+
+export default userSlice.reducer;
+export const { setAuthenticated } = userSlice.actions;
+
+** userSlice set up your store on store.js
+** setAuthenticated use to set Your state
+** You get your state on first[state]second[store>reducer{name✅:} andLast[initialState={name:✅ }
+
+
+
+
+
+<<========================= splice ==============================>>
+1. element add and remove splice(first args what position you need to start add or delete , second args how many product  delete , product , product)
+
+
+
+
+
+
+
+import { PrismaClient } from "@prisma/client";
+
+// export const prisma = new PrismaClient()
+
+declare global {
+  var prisma : PrismaClient | undefined
+}
+
+export const prisma = global.prisma || new PrismaClient();
+
+if(process.env.NODE_ENV !== "production"){
+  global.prisma = prisma
+}
+
+
+
+
+
+
+** 

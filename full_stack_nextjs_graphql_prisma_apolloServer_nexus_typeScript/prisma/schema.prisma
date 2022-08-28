@@ -1,0 +1,129 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgres"
+  url      = "postgres://admin:secret@localhost:5432/postgres"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String
+  image     String?
+  admin     Boolean
+  link      Link[]
+
+  @@map("user")
+}
+
+model Link {
+  id          Int      @id @default(autoincrement())
+  createAt    DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String
+  description String
+
+  userId    Int?
+  url       String?
+  imagesUrl String?
+  category  String?
+
+  User User? @relation(fields: [userId], references: [id])
+
+  @@map("link")
+}
+
+model myUser {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String
+  password String
+}
+
+// // model user {
+//   id        Int         @id @default(autoincrement())
+//   name      String?     @db.VarChar(255)
+//   image     String?     @db.VarChar(255)
+//   decs      String?     @db.VarChar(1000)
+//   email     String      @unique @db.VarChar(255)
+//   role      String?     @default("admin")
+//   active    Boolean     @default(true)
+//   password  String      @db.VarChar(255)
+//   createdAt DateTime    @default(now())
+//   updatedAt DateTime    @default(now())
+//   client_id Int?
+//   activites activites[]
+// }
+
+// model event {
+//   id          Int      @id @default(autoincrement())
+//   title       String
+//   description String?
+//   image       String?
+//   active      Boolean  @default(true)
+//   date        DateTime
+// }
+
+// model inquiry_contact {
+//   id        Int      @id @default(autoincrement())
+//   name      String?  @db.VarChar(1000)
+//   email     String   @db.VarChar(255)
+//   message   String?  @db.VarChar(1000)
+//   status    String
+//   type      Json
+//   active    Boolean  @default(true)
+//   seen      Boolean  @default(false)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+// }
+
+// model activites {
+//   id        Int      @id @default(autoincrement())
+//   detail    String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+//   userId    Int?
+//   type      String
+//   User      user?    @relation(fields: [userId], references: [id])
+// }
+
+// model media {
+//   id                Int     @id @default(autoincrement())
+//   url               String
+//   format            String?
+//   folder            String?
+//   asset_id          String?
+//   public_id         String
+//   alter_text        String?
+//   resource_type     String?
+//   original_filename String?
+// }
+
+// model brand {
+//   id      Int     @id @default(autoincrement())
+//   name    String?
+//   logo    String?
+//   links   Json?
+//   address String
+//   email   String
+//   phone   String
+// }
+
+// model home {
+//   id              Int    @id @default(autoincrement())
+//   hero_title      String
+//   hero_subtitle   String
+//   welcome_title   String
+//   welcome_details String
+//   mission_title   String
+//   mission_details String
+//   wtime_text      String
+//   wtime_time      String
+//   pandbs          String
+// }
